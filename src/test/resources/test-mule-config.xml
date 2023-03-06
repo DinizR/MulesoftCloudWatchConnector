@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:aws-cloudwatch="http://www.mulesoft.org/schema/mule/aws-cloudwatch"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/aws-cloudwatch http://www.mulesoft.org/schema/mule/aws-cloudwatch/current/mule-aws-cloudwatch.xsd">
+
+    <aws-cloudwatch:config name="config" configId="configId">
+        <aws-cloudwatch:connection requiredParameter="aValue" />
+    </aws-cloudwatch:config>
+
+    <flow name="sayHiFlow">
+        <aws-cloudwatch:say-hi person="Mariano Gonzalez"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <aws-cloudwatch:retrieve-info config-ref="config"/>
+    </flow>
+
+</mule>
