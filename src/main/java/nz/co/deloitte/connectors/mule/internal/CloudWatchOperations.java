@@ -1,3 +1,7 @@
+/*
+ * CloudWatchOperations.java
+ */
+
 package nz.co.deloitte.connectors.mule.internal;
 
 import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
@@ -25,15 +29,18 @@ import software.amazon.awssdk.services.cloudwatchlogs.model.PutLogEventsResponse
 /**
  * This class is a container for operations, every public method in this class
  * will be taken as an extension operation.
+ * 
+ * @author rodrigo
+ * @since 2023/03
  */
-public class AwscloudwatchOperations {
-	private final Logger logger = LoggerFactory.getLogger(AwscloudwatchOperations.class);
+public class CloudWatchOperations {
+	private final Logger logger = LoggerFactory.getLogger(CloudWatchOperations.class);
 
 	/**
 	 * Example of an operation that uses the configuration to perform a retrieve Info operation.
 	 */
 	@MediaType(value = ANY, strict = false)
-	public String retrieveInfo(@Config final AwscloudwatchConfiguration config) {
+	public String retrieveInfo(@Config final CloudWatchConfiguration config) {
 		logger.debug("Capturing the configurations...");
 		return config.toString();
 	}
@@ -44,7 +51,7 @@ public class AwscloudwatchOperations {
 	 */
 	@Alias("SendLogs")
 	@MediaType(value = ANY, strict = false)
-	public void sendLogs(@Config final AwscloudwatchConfiguration configs, final List<?> events) {
+	public void sendLogs(@Config final CloudWatchConfiguration configs, final List<?> events) {
 		final ObjectMapper mapper = new ObjectMapper();
 		final CloudWatchLogsClient client = CloudWatchLogsClient.builder()
 				.credentialsProvider(SystemPropertyCredentialsProvider.create())
